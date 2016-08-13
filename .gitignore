@@ -1,0 +1,8 @@
+*.pyc
+bower_components/
+index.yaml
+my/twitter/secret.py
+# don't include third-party dependencies.
+# lib/
+# !lib/README.md
+# .DS_Store

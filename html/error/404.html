@@ -1,0 +1,20 @@
+{% extends "html/base.html" %}
+{% block title %}ページが見つかりません - {% endblock %}
+{% block relativepath %}..{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+          <h3>ページが見つかりません <small>404 Page Not Found</small></h3>
+          <hr>
+          <div class="error-details">
+              お探しのページは見つかりませんでした。</br> ページは削除されたか、何らかのエラーで作成されなかった可能性があります。
+          </div>
+          <div class="error-actions">
+              <a href="/" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span> TOPへ</a>
+              <a href="/contact" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-question-sign"></span> お問い合わせ</a>
+          </div>
+
+    </div>
+    <!-- /.container -->
+{% endblock %}

@@ -1,0 +1,28 @@
+{% macro thumbnail(tweet) -%}
+<div class="link-box">
+    <div class="col-md-4 col-sm-6 hero-feature">
+        <div class="thumbnail">
+            <div class="thumbnail-image-caption-wrapper">
+                {% if tweet.media %}
+                <div class="thumbnail-image-wrapper">
+                    <img class="img-responsive" src="{{ tweet.media.url }}" alt="{{ tweet.user.name }}さんの投稿した画像">
+                </div>
+                <div class="thumbnail-caption">
+                    <h4>{{ tweet.text }}</h4>
+                </div>
+                {% else %}
+                <div class="thumbnail-caption-no-image">
+                    <h3>{{ tweet.text }}</h3>
+                </div>
+                {% endif %}
+            </div>
+            <div class="thumbnail-author-wrapper">
+                <div class="thumbnail-author">
+                    <img src="{{ tweet.user.profile_image_url }}" alt="{{ tweet.user.name }}"> <span>{{ tweet.user.name }}</span>
+                </div>
+            </div>
+            <a href="/tweet/{{tweet.id}}"></a>
+        </div>
+    </div>
+</div>
+{%- endmacro %}

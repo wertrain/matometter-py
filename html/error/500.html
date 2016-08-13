@@ -1,0 +1,19 @@
+{% extends "html/base.html" %}
+{% block title %}サーバでエラーが発生しました - {% endblock %}
+{% block relativepath %}..{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+          <h3>サーバ 内部エラー <small>500 Internal Server Error</small></h3>
+          <hr>
+          <div class="error-details">
+              サーバでエラーが発生しています。</br>申し訳ありませんが、復旧までしばらくお待ちください。
+          </div>
+          <div class="error-actions">
+              <a href="/contact" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-question-sign"></span> お問い合わせ</a>
+          </div>
+
+    </div>
+    <!-- /.container -->
+{% endblock %}

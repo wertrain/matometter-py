@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="まとめったーは、Twitterに投稿されたツイートをリアルタイムで解析し、人気・話題のツイートをまとめています。">
+    <meta name="author" content="">
+    <link rel="icon" href="static/images/favicon.ico">
+
+    <title>{% block title %}{% endblock %}{{ title }}</title>
+
+    <link href="static/vender/css/bootstrap.cerulean.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    {# 追加スタイルシート #}
+    {% block style %}{% endblock %}
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--<a class="navbar-brand" href="#">ツイッター<span class="icon-color-star glyphicon glyphicon-star"></span>人気ツイートのまとめ</a>-->
+                <a class="navbar-brand" href="/"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{relativepath}}/ranking/week"><span class="glyphicon glyphicon-star"></span> 人気ツイートランキング</a>
+                    </li>
+                    <li>
+                        <a href="{{relativepath}}/users/week"><span class="glyphicon glyphicon-user"></span> 人気ユーザーランキング</a>
+                    </li>
+                    <li>
+                        <a href="{{relativepath}}/about"><span class="glyphicon glyphicon-info-sign"></span> このサイトについて</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input placeholder="キーワード" class="form-control">
+                </div>
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> 検索</button>
+            </form> -->
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    {# ページのコンテンツ部分 #}
+    {% block content %}{% endblock %}
+    
+    {# スマホ用オーバーレイ広告 - nend #}
+    <div class="visible-xs-block">
+      <script type="text/javascript">
+      var nend_params = {"media":30183,"site":156792,"spot":423990,"type":2,"oriented":1};
+      </script>
+      <script type="text/javascript" src="http://js1.nend.net/js/nendAdLoader.js"></script>
+    </div>
+    {# タブレット用オーバーレイ広告 - nend #}
+    <div class="visible-sm-block">
+      <script type="text/javascript">
+      var nend_params = {"media":30183,"site":156792,"spot":423992,"type":2,"oriented":1,"sp":0};
+      </script>
+      <script type="text/javascript" src="http://js1.nend.net/js/nendAdLoader.js"></script>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="text-center">© {{ title }} 2015 all rights reserved.</div>
+      </div>
+    </footer>
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="static/vender/js/bootstrap.min.js"></script>
+    {# 追加のスクリプト #}
+    {% block script %}{% endblock %}
+  </body>
+</html>

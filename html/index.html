@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>{{ title }}</title>
+
+    <link href="static/vender/css/bootstrap.cerulean.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">ツイッター<span class="title-star glyphicon glyphicon-star"></span>人気ツイートのまとめ</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <!--<li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>-->
+          </ul>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input placeholder="キーワード" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> 検索</button>
+          </form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    
+    <div class="container">
+      <div class="row">
+        <p>毎時更新中！ ツイッターで話題 & 人気をまとめています。</p>
+        <div class="col-sm-7">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="#tab_popular" data-toggle="tab"><span class="title-star glyphicon glyphicon-star"></span> 人気</a></li>
+            <li><a href="#tab_new" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span> 新着</a></li>
+            <li><a href="#tab_tags" data-toggle="tab"><span class="glyphicon glyphicon-tag"></span> タグ</a></li>
+            <li><a href="#tab_onlyimages" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> 画像のみ</a></li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="tab_popular">
+
+              {% for tweet in tweets %}
+                <blockquote class="twitter-tweet" align="center" lang="{{ tweet.lang }}">{{ tweet.text }}</p>&mdash; {{ tweet.user.name }} <a href="https://twitter.com/{{ tweet.user.screen_name }}/status/{{ tweet.id }}">{{ tweet.created_at }}</a></blockquote>
+                <script async src="//platform.twitter.com/widgets.js" align="center" charset="utf-8"></script>
+              {% endfor %}
+
+            </div>
+            <div class="tab-pane fade" id="tab_new">
+              新着
+            </div>
+            <div class="tab-pane fade" id="tab_tags">
+              <h2>タグ一覧</h2>
+              {% for tag in tags %}
+                  <span>{{ tag.name }}</span>
+              {% endfor %}
+            </div>
+            
+            <div class="tab-pane fade" id="tab_onlyimages">
+              
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-sm-5">
+          <div class="jumbotron">
+            広告スペース 1
+          </div>
+          <div class="jumbotron">
+          広告スペース 2
+          </div>
+          <div class="list-group">
+            <a href="#" class="list-group-item active">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+          </div>
+        </div><!-- sidebar -->
+
+      <!-- Main component for a primary marketing message or call to action
+      <div class="jumbotron">
+        <h1>Navbar example</h1>
+        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+        </p>
+      </div> -->
+      </div> <!-- /row -->
+    </div> <!-- /container -->
+    
+    <footer class="footer">
+      <div class="container">
+        <div class="text-center">© {{ title }} 2015 all rights reserved.</div>
+      </div>
+    </footer>
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="static/vender/js/bootstrap.min.js"></script>
+  </body>
+</html>

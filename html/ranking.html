@@ -1,0 +1,166 @@
+{% extends "html/base.html" %}
+
+{% set ranking_name = "" %}
+{% if type == 0 %}
+  {% set ranking_name = "今日" %}
+{% elif type == 1 %}
+  {% set ranking_name = "今週" %}
+{% elif type == 2 %}
+  {% set ranking_name = "今月" %}
+{% endif %}
+
+{% block title %}{{ ranking_name }}の人気ツイート - {% endblock %}
+{% block relativepath %}..{% endblock %}
+
+{% block content %}
+  <div class="container">
+
+    <div class="row">
+      <!-- パンくず -->
+      <div class="col-lg-12">
+        <ol class="breadcrumb">
+          <li><span class="glyphicon glyphicon-home"></span> <a href="/">ホーム</a></li>
+          <li class="active"><span class="glyphicon glyphicon-list"></span> {{ ranking_name }}の人気ツイート</li>
+        </ol>
+      </div>
+    </div>
+
+    <ul class="nav nav-pills">
+      <li role="presentation" {% if type == 0 %}class="active"{% endif %}><a href="/ranking/today">今日</a></li>
+      <li role="presentation" {% if type == 1 %}class="active"{% endif %}><a href="/ranking/week">今週</a></li>
+      <li role="presentation" {% if type == 2 %}class="active"{% endif %}><a href="/ranking/month">今月</a></li>
+    </ul>
+
+    <!-- Page Heading -->
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">人気ランキング
+          <small>{{ ranking_name }}の人気ツイート</small>
+        </h1>
+      </div>
+    </div>
+
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-md-8">
+        {% for tweet in tweets %}
+          <div class="row link-box">
+            <div class="col-md-2">
+              <span class="ranking-number">{{ loop.index0 + 1 }} 位</span>
+            </div>
+            <div class="col-md-8">
+              {% if tweet.media %}
+                <img class="img-responsive" src="{{ tweet.media.url }}" alt="{{ tweet.user.name }}さんの投稿した画像">
+                <div class="thumbnail-caption">
+                  <h4>{{ tweet.text }}</h4>
+                </div>
+              {% else %}
+                <h3>{{ tweet.text }}</h3>
+              {% endif %}
+            </div>
+            <a href="/tweet/{{tweet.id}}"></a>
+          </div>
+          <hr>
+        {% endfor %}
+        </div>
+        <div class="col-md-3">
+          {# 汎用レスポンシブ広告 - Google Adsense #}
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- 汎用レスポンシブ広告 -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-7640693235765722"
+               data-ad-slot="5955111493"
+               data-ad-format="auto"></ins>
+          <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </div>
+    
+    <!--
+    <div class="row">
+        <div class="col-md-7">
+          <a href="#">
+            <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+          </a>
+        </div>
+        <div class="col-md-5">
+          <h3>Project One</h3>
+          <h4>Subheading</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+          <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-7">
+          <a href="#">
+            <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+          </a>
+        </div>
+        <div class="col-md-5">
+          <h3>Project Two</h3>
+          <h4>Subheading</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+          <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-7">
+          <a href="#">
+            <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+          </a>
+        </div>
+        <div class="col-md-5">
+          <h3>Project Three</h3>
+          <h4>Subheading</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at, praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet commodi deleniti alias possimus!</p>
+          <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+
+        <div class="col-md-7">
+          <a href="#">
+            <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+          </a>
+        </div>
+        <div class="col-md-5">
+          <h3>Project Four</h3>
+          <h4>Subheading</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur, officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit quam in suscipit?</p>
+          <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-7">
+          <a href="#">
+            <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+          </a>
+        </div>
+        <div class="col-md-5">
+          <h3>Project Five</h3>
+          <h4>Subheading</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, quo, minima, inventore voluptatum saepe quos nostrum provident ex quisquam hic odio repellendus atque porro distinctio quae id laboriosam facilis dolorum.</p>
+          <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+    </div>
+    -->
+    
+    <hr>
+
+  </div>
+  <!-- /.container -->
+{% endblock %}

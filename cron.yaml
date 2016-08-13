@@ -1,0 +1,20 @@
+cron:
+- description: ツイートを取得する
+  url: /update_tweet
+  schedule: every 120 minutes
+  timezone: Asia/Tokyo
+
+- description: 人気のツイートを取得し、IDを保存する
+  url: /store_trends_tweet
+  schedule: every 60 minutes
+  timezone: Asia/Tokyo
+
+- description: 保存されたIDを使ってツイートを取得する
+  url: /get_tweets_by_stored
+  schedule: every 30 minutes
+  timezone: Asia/Tokyo
+
+- description: 人気のツイートをリツイートする
+  url: /retweet
+  schedule: every 60 minutes
+  timezone: Asia/Tokyo

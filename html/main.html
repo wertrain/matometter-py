@@ -1,0 +1,148 @@
+{% extends "html/base.html" %}
+
+{% block content %}
+    <div class="container">
+
+        <!-- Title -->
+        <!--<div class="row">
+            <div class="col-lg-12">
+                毎時更新中！ ツイッターで話題 & 人気のツイートをまとめています。
+            </div>
+        </div>-->
+<!-- 
+<div class="row">
+<div class="col-sm-7">
+<ul class="nav nav-pills">
+<li class="active"><a href="#tab_popular" data-toggle="tab"><span class="icon-color-star glyphicon glyphicon-star"></span> 本日の人気</a></li>
+<li><a href="#tab_new" data-toggle="tab"><span class="icon-color-flash glyphicon glyphicon-flash"></span> 週間人気ランキング</a></li>
+<li><a href="#tab_tags" data-toggle="tab"><span class="icon-color-tag glyphicon glyphicon-tag"></span> タグ一覧</a></li>
+<li><a href="#tab_onlyimages" data-toggle="tab"><span class="icon-color-picture glyphicon glyphicon-picture"></span> 画像のみ</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+<div class="tab-pane fade in active" id="tab_popular">
+
+</div>
+<div class="tab-pane fade" id="tab_new">
+新着
+</div>
+<div class="tab-pane fade" id="tab_tags">
+<h2>タグ一覧</h2>
+{% for tag in tags %}
+<span>{{ tag.name }}</span>
+{% endfor %}
+</div>
+
+<div class="tab-pane fade" id="tab_onlyimages">
+
+</div>
+</div>
+</div>
+
+<div class="col-sm-5">
+<div class="jumbotron">
+広告スペース 1
+</div>
+<div class="jumbotron">
+広告スペース 2
+</div>
+<div class="list-group">
+<a href="#" class="list-group-item active">Link</a>
+<a href="#" class="list-group-item">Link</a>
+<a href="#" class="list-group-item">Link</a>
+<a href="#" class="list-group-item">Link</a>
+<a href="#" class="list-group-item">Link</a>
+<a href="#" class="list-group-item">Link</a>
+<a href="#" class="list-group-item">Link</a>
+<a href="#" class="list-group-item">Link</a>
+<a href="#" class="list-group-item">Link</a>
+<a href="#" class="list-group-item">Link</a>
+</div>
+</div>
+</div>
+ -->
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <span class="glyphicon glyphicon-star"></span> 最新人気 No.1 ツイート
+                        </div>
+                    </div>
+                    <div class="panel-body link-box">
+                        <div class="media">
+                            <span class="media-left" href="#">
+                                {% if recommend_tweet.media %}
+                                <div class="thumbnail-image-wrapper">
+                                    <img class="img-responsive" src="{{ recommend_tweet.media.url }}" alt="">
+                                </div>
+                                {% endif %}
+                            </span>
+                            <div class="media-body media-middle">
+                                <h4 class="media-heading">{{ recommend_tweet.text }}</h4>
+                            </div>
+                        </div>
+                        <a href="/tweet/{{ recommend_tweet.id }}"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                {# レスポンシブデザイン広告 - Google Adsense #}
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- 汎用レスポンシブ広告 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-7640693235765722"
+                     data-ad-slot="5955111493"
+                     data-ad-format="auto"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+        <hr>
+
+        <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>新着の画像あり人気ツイート</h3>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Page Features -->
+        <div class="row">
+
+            {% import 'html/parts/ui.html' as ui %}
+            {% for tweet in tweets %}
+                {{ ui.thumbnail(tweet) }}
+            {% endfor %}
+
+            <!--
+            <div class="col-md-4 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>Feature Label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p>
+                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+        
+        <div class="row">
+          <div class="more-newer-tweet-wrapper text-center">
+            <a href="/1" type="button" class="btn btn-default btn-lg">
+              新着ツイートをさらに見る <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+{% endblock %}

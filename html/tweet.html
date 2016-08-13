@@ -1,0 +1,212 @@
+{% extends "html/base.html" %}
+{% block title %}{{ tweet.user.name }}さんの投稿 [{{ tweet.id }}] - {% endblock %}
+{% block relativepath %}..{% endblock %}
+
+{% block style %}
+    <link href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            <!-- パンくず -->
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span> <a href="/">ホーム</a></li>
+                    <li><span class="glyphicon glyphicon-list"></span> <a href="/user/{{ tweet.user.id }}">{{ tweet.user.name }}さんの投稿</a></li>
+                    <li class="active"><span class="glyphicon glyphicon-pencil"></span> 投稿ID [{{ tweet.id }}]</li>
+                </ol>
+            </div>
+            <!-- 
+            <div class="col-lg-12">
+                <h2 class="page-header">
+                    <img src="{{ tweet.user.profile_image_url }}" alt="{{ tweet.user.name }}">
+                    {{ tweet.user.name }}
+                    <small>@{{ tweet.user.screen_name }}</small>
+                </h1>
+            </div>
+            -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <h2>{{ tweet.text }}</h2>
+                <p>
+                {% if tweet.media %}
+                    {% if tweet.media.video %}
+                        <div align="center" class="embed-responsive embed-responsive-16by9">
+                            <video autoplay controls loop class="embed-responsive-item">
+                                <source src="{{ tweet.media.video.url }}" type="{{ tweet.media.video.type }}">
+                            </video>
+                        </div>
+                    {% else %}
+                        {% for url in tweet.media.urls %}
+                            <img class="img-responsive" src="{{ url }}" alt="{{ tweet.user.name }}さんが投稿した画像">
+                            <!--<img class="img-responsive" src="{{ url }}:large" alt="{{ tweet.user.name }}さんが投稿した画像">-->
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+                </p>
+
+                <div class="row tweet-link-wrapper">
+                    <div class="col-xs-4">
+                        <a href="https://twitter.com/{{ tweet.user.screen_name }}/status/{{ tweet.id }}" type="button" class="btn btn-block btn-primary btn-sm">投稿元 <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                    <div class="col-xs-8 input-group-sm">
+                        <input class="form-control" value="https://twitter.com/{{ tweet.user.screen_name }}/status/{{ tweet.id }}"></input>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            ツイートの投稿者
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="media">
+                            <a class="media-left" href="#">
+                                <img src="{{ tweet.user.profile_image_url }}" alt="{{ tweet.user.name }}">
+                            </a>
+                            <div class="media-body media-middle">
+                                <h3 class="media-heading">
+                                    <a href="/user/{{ tweet.user.id }}">{{ tweet.user.name }}</a></br>
+                                    <a href="https://twitter.com/{{ tweet.user.screen_name }}"><small>@{{ tweet.user.screen_name }}</small></a>
+                                </h3>
+                            </div>
+                        </div>
+                        <!--Twitter Follow Button-->
+                        <a href="https://twitter.com/{{ tweet.user.screen_name }}" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false">Follow @{{ tweet.user.screen_name }}</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            このツイートの人気度
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="rtfavchart" style="height: 250px;"></div>
+                    </div>
+                </div>
+                
+                {# レスポンシブデザイン広告 - Google Adsense #}
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- 汎用レスポンシブ広告 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-7640693235765722"
+                     data-ad-slot="5955111493"
+                     data-ad-format="auto"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+                <!-- 
+                <h3>Project Description</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+                <h3>Project Details</h3>
+                <ul>
+                    <li>Lorem Ipsum</li>
+                    <li>Dolor Sit Amet</li>
+                    <li>Consectetur</li>
+                    <li>Adipiscing Elit</li>
+                </ul>
+                <div id="rtfavchart" style="height: 250px;"></div>
+                -->
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">{{ tweet.user.name }}さんの人気投稿</h3>
+            </div>
+            {% import 'html/parts/ui.html' as ui %}
+            {% for tweet in tweets %}
+                {{ ui.thumbnail(tweet) }}
+            {% endfor %}
+            <!--
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+            -->
+        </div>
+        
+        <div class="row">
+          <div class="more-newer-tweet-wrapper text-center">
+            <a href="/user/{{ tweet.user.id }}" type="button" class="btn btn-default btn-lg">
+              {{ tweet.user.name }}さんの他のツイート <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+        <!-- /.row -->
+        <!--<hr>-->
+    </div>
+    <!-- /.container -->
+{% endblock %}
+    
+{% block script %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script>
+    new Morris.Line({
+        // ID of the element in which to draw the chart.
+        element: 'rtfavchart',
+        // Chart data records -- each entry in this array corresponds to a point on
+        // the chart.
+        data: [
+            {% for count in tweet.history.counts %}
+                 { unixtime: {{ count.timestamp }}, favorite: '{{ count.favorite }}', retweet: '{{ count.retweet }}' },
+            {% endfor %}
+        ],
+        // The name of the data record attribute that contains x-values.
+        xkey: 'unixtime',
+        // A list of names of data record attributes that contain y-values.
+        ykeys: ['favorite', 'retweet'],
+        // Labels for the ykeys -- will be displayed when you hover over the
+        // chart.
+        labels: ['お気に入り数', 'リツイート数'],
+        hideHover: 'auto',
+        xLabelFormat: function (unixtime) {
+            var format = 'hh:mm:ss';
+            var date = new Date(unixtime * 1000);
+            format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2));
+            format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
+            format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
+            return format;
+        },
+        dateFormat: function (unixtime) { return new Date(unixtime * 1000).toDateString(); },
+        resize: true
+    });
+    </script>
+{% endblock %}
