@@ -1,7 +1,7 @@
 ﻿まとめったー
 ======================
 Twitter の人気投稿を自動収集し、表示する Web サービス。  
-URL: [まとめった](http://matometter.com) 
+URL: http://matometter.com [まとめったー](http://matometter.com) 
 
 開発について
 ------------------
